@@ -1,0 +1,6 @@
+﻿services:
+  redfox.api:
+    image: redfox.api
+    build:
+      context: .
+      dockerfile: RedFox.Api/Dockerfile

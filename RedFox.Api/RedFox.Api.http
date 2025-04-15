@@ -1,0 +1,8 @@
+@RedFox.Api_HostAddress = http://localhost:5105
+
+GET {{RedFox.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+GET {{RedFox.Api_HostAddress}}/users/
+Accept: application/json
