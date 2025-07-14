@@ -15,9 +15,5 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Name).IsRequired().HasMaxLength(100);
         builder.Property(u => u.Username).IsRequired().HasMaxLength(50);
-        builder.HasOne(u => u.Company)
-            .WithOne(c => c.User)
-            .HasForeignKey<Company>(c => c.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

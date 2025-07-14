@@ -1,9 +1,11 @@
 # RedFox Technical Test
 
 ## Introduction
+
 This solution is a skeleton for managing user data from a remote API endpoint. Your task is to complete the implementation to fully support the data structure returned by the external API.
 
 ## Project Structure
+
 ```
 RedFoxInterviewTest/
 ├── RedFox.Api          # Web API & Controllers
@@ -13,6 +15,7 @@ RedFoxInterviewTest/
 ```
 
 ## Current Implementation
+
 - ✅ Basic User/Company entities
 - ✅ EF Core DbContext configuration
 - ✅ Background service for initial data seeding
@@ -22,32 +25,39 @@ RedFoxInterviewTest/
 ## Technical Test Requirements
 
 ### 1. Complete Domain Model
+
 - Add missing entities to match the API response structure
 - Establish proper relationships between entities
 - Consider value objects where appropriate
 
 ### 2. Database Configuration
+
 - Configure EF Core relationships for nested entities
 - Ensure proper migration generation
 - Update data seeding service to handle full dataset
 
 ### 3. API Development
+
 - Enhance existing endpoint to return full nested structure
 - Add proper CORS configuration
 - Maintain Clean Architecture principles
 
 ### 4. CQRS Implementation
+
 - Update existing queries/handlers to include all relationships
 - Modify DTOs to reflect complete data structure
 - Ensure proper mapping between entities and DTOs
 
 ### 5. Documentation
+
 - Add brief documentation about your approach
 - List any trade-offs or assumptions made
 - Provide instructions for testing the solution
 
 ## Expected API Response
+
 The `GET /users` endpoint should return data in this format:
+
 ```json
 [
   {
@@ -77,6 +87,7 @@ The `GET /users` endpoint should return data in this format:
 ```
 
 ## Evaluation Criteria
+
 1. **Architecture Compliance**
     - Proper layer separation
     - Adherence to Clean Architecture principles
@@ -100,7 +111,9 @@ The `GET /users` endpoint should return data in this format:
     - Setup/usage instructions
 
 ## Time Expectation
-We expect this technical test to be completed within **8 hours of focused development time**. Please document any incomplete parts with explanations.
+
+We expect this technical test to be completed within **8 hours of focused development time**. Please document any
+incomplete parts with explanations.
 
 ---
 
