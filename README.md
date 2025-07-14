@@ -286,20 +286,22 @@ Your Pull Request description should include:
 - **Testing Instructions:** How to verify your implementation works
 - **Time Breakdown:** Actual time spent on each major component
 
-### Evaluation Criteria
+### Evaluation Criteria (Total: 100 Points)
 
-| Category | Weight | Focus Areas |
+| Category | Points | Focus Areas |
 |----------|--------|-------------|
-| **Architecture Compliance** | 25% | Clean Architecture separation, dependency direction, CQRS adherence |
-| **Data Modeling & EF Core** | 25% | Entity relationships, EF Core configuration, efficient queries |
-| **CRUD API Implementation** | 30% | Complete operations, JSON format, HTTP codes, validation |
-| **Code Quality & Patterns** | 10% | Clean code, proper patterns, existing conventions |
-| **Documentation & Testing** | 10% | Design explanations, verification ability, commit history |
+| **Architecture Compliance** | 25 pts | Clean Architecture separation, dependency direction, CQRS adherence |
+| **Data Modeling & EF Core** | 25 pts | Entity relationships, EF Core configuration, efficient queries |
+| **CRUD API Implementation** | 30 pts | Complete operations, JSON format, HTTP codes, validation |
+| **Code Quality & Patterns** | 10 pts | Clean code, proper patterns, existing conventions |
+| **Documentation & Testing** | 10 pts | Design explanations, verification ability, commit history |
 
-### Evaluation Bonus
-- **Clear PR description:** +5 bonus points
-- **Comprehensive documentation:** +3 bonus points  
-- **Clean commit history:** +2 bonus points
+### Evaluation Bonus (Maximum +10 points)
+- **Clear PR description:** +5 points
+- **Comprehensive documentation:** +3 points  
+- **Clean commit history:** +2 points
+
+**Final Score:** Base score (0-100) + Bonus points (0-10) = Total score (0-110)
 
 ### Time Allocation Guidance
 
