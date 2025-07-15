@@ -256,35 +256,47 @@ dotnet run --project RedFox.Api
 
 ## 6. Submission & Evaluation
 
-### Git Workflow Requirements
+### Repository Submission Requirements
 
-1. **Create Feature Branch:**
+1. **Clone to Your Personal Repository:**
    ```bash
-   git checkout -b firstName_lastName
+   # Clone this repository
+   git clone [original-repository-url]
+   cd RedFoxInterviewTest
+   
+   # Remove the original remote
+   git remote remove origin
+   
+   # Create a new repository on your GitHub/GitLab account
+   # Then add it as your new origin
+   git remote add origin https://github.com/YOUR_USERNAME/redfox-technical-test.git
+   
+   # Push to your repository
+   git push -u origin main
    ```
-   Replace `firstName_lastName` with your actual name (e.g., `john_doe`)
 
 2. **Development Process:**
    - Make regular commits with clear, descriptive messages
    - Follow conventional commit format when possible
    - Commit frequently to show development progression
+   - Keep your repository private during development
 
-3. **Pull Request Submission:**
-   ```bash
-   git push origin firstName_lastName
-   ```
-   - Create a Pull Request from your branch to `main`
-   - **Important:** A well-described PR earns additional points
+3. **Submission:**
+   - Ensure all changes are committed and pushed to your repository
+   - Add a comprehensive README.SOLUTION.md file documenting your implementation
+   - Share your repository URL with the hiring team
+   - Make the repository public after submission deadline
 
-### PR Description Requirements
+### Solution Documentation Requirements
 
-Your Pull Request description should include:
+Create a `README.SOLUTION.md` file in your repository that includes:
 - **Summary:** Brief overview of what you implemented
 - **Architecture Decisions:** Explain your entity design choices (entities vs value objects)
 - **CRUD Implementation:** Describe your API design and validation strategy
 - **Trade-offs:** Document any assumptions or compromises made
 - **Testing Instructions:** How to verify your implementation works
 - **Time Breakdown:** Actual time spent on each major component
+- **Challenges Faced:** Any significant obstacles and how you overcame them
 
 ### Evaluation Criteria (Total: 100 Points)
 
@@ -297,8 +309,8 @@ Your Pull Request description should include:
 | **Documentation & Testing** | 10 pts | Design explanations, verification ability, commit history |
 
 ### Evaluation Bonus (Maximum +10 points)
-- **Clear PR description:** +5 points
-- **Comprehensive documentation:** +3 points  
+- **Clear solution documentation (README.SOLUTION.md):** +5 points
+- **Comprehensive code documentation:** +3 points  
 - **Clean commit history:** +2 points
 
 **Final Score:** Base score (0-100) + Bonus points (0-10) = Total score (0-110)
@@ -496,4 +508,4 @@ dotnet run --project RedFox.Api --urls="http://localhost:5106"
 
 ---
 
-**Good luck!** Remember that communication through your PR description is as important as the code itself.
+**Good luck!** Remember that your solution documentation and commit history demonstrate your development process and decision-making.
