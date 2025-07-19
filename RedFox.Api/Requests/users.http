@@ -1,0 +1,75 @@
+﻿@baseUrl = http://localhost:5105
+#@userId = 1
+
+### 🔍 Get All Users
+GET {{baseUrl}}/users
+Accept: application/json
+
+###
+
+### 🔍 Get Single User by ID
+GET {{baseUrl}}/users/{{userId}}
+Accept: application/json
+
+###
+
+### 🆕 Create User
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Leanne Graham",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "phone": "1-770-736-8031 x56442",
+  "website": "hildegard.org",
+  "address": {
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Gwenborough",
+    "zipcode": "92998-3874",
+    "geo": {
+      "lat": "-37.3159",
+      "lng": "81.1496"
+    }
+  },
+  "company": {
+    "name": "Romaguera-Crona",
+    "catchPhrase": "Multi-layered client-server neural-net",
+    "bs": "harness real-time e-markets"
+  }
+}
+
+###
+
+### ✏️ Update User
+PUT {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+
+{
+  "name": "Leanne Graham Updated",
+  "username": "BretUpdated",
+  "email": "leanne.updated@example.com",
+  "phone": "123-456-7890",
+  "website": "leanne-updated.org",
+  "address": {
+    "street": "Updated Street",
+    "suite": "Suite 42",
+    "city": "Updated City",
+    "zipcode": "00000-0000",
+    "geo": {
+      "lat": "0.0000",
+      "lng": "0.0000"
+    }
+  },
+  "company": {
+    "name": "Updated-Corp",
+    "catchPhrase": "Updated client-server neural-net",
+    "bs": "update real-time systems"
+  }
+}
+
+###
+
+### ❌ Delete User
+DELETE {{baseUrl}}/users/{{userId}}
