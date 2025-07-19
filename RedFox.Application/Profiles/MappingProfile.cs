@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using RedFox.Application.DTO;
+using RedFox.Application.Features.Users.Update;
 using RedFox.Domain.Entities;
 using RedFox.Domain.ValueObjects;
 
@@ -51,5 +52,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Company, opt => opt.MapFrom(src => src.Company));
 
         CreateMap<AddUserWithRelatedRequest, User>();
+
+        CreateMap<UpdateUserWithRelatedRequest, User>();
     }
 }

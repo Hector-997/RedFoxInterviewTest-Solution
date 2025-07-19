@@ -18,20 +18,10 @@ public class AddUserWithRelatedCommandHandler(
 {
     public async Task<int> Handle(AddUserWithRelatedCommand request, CancellationToken ct)
     {
-        await using var transaction = await context.Database.BeginTransactionAsync(ct);
-        try
-        {
-            var user = mapper.Map<User>(request.User);
-            await context.Users.AddAsync(user, ct);
-            await context.SaveChangesAsync(ct);
-            await transaction.CommitAsync(ct);
-            return user.Id;
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Batch user creation failed");
-            await transaction.RollbackAsync(ct);
-            throw;
-        }
+        var user = mapper.Map<User>(request.Payload);
+        await context.Users.AddAsync(user, ct);
+        await context.SaveChangesAsync(ct);
+        logger.LogInformation($"User created: {user.Id}");
+        return user.Id;
     }
 }

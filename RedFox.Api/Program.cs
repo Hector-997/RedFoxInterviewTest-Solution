@@ -7,6 +7,7 @@ using RedFox.Application.DTO;
 using RedFox.Application.Features.Users.Create;
 using RedFox.Application.Features.Users.GetAll;
 using RedFox.Application.Features.Users.GetSingle;
+using RedFox.Application.Features.Users.Update;
 using RedFox.Infrastructure;
 
 #endregion
@@ -48,6 +49,16 @@ app.MapPost("/users", async (AddUserWithRelatedRequest request, IMediator mediat
     })
     .WithName("CreateUser")
     .WithOpenApi();
+
+app.MapPut("/users/{id}", async (int id, UpdateUserWithRelatedRequest request, IMediator mediator) =>
+{
+    var result = await mediator.Send(new UpdateUserWithRelatedCommand(id, request));
+
+    return result is not null
+        ? Results.Ok(result)
+        : Results.NotFound($"User with ID {id} was not found.");
+});
+
 
 
 await app.RunAsync();

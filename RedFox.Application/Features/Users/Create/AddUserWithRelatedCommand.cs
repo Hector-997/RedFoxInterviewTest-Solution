@@ -3,4 +3,4 @@ using RedFox.Application.DTO;
 
 namespace RedFox.Application.Features.Users.Create;
 
-public record AddUserWithRelatedCommand(AddUserWithRelatedRequest User) : IRequest<int>;
+public record AddUserWithRelatedCommand(AddUserWithRelatedRequest Payload) : IRequest<int>;

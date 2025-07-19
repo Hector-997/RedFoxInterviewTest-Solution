@@ -1,5 +1,5 @@
 ﻿@baseUrl = http://localhost:5105
-#@userId = 1
+@userId = 31
 
 ### 🔍 Get All Users
 GET {{baseUrl}}/users
@@ -51,7 +51,7 @@ Content-Type: application/json
   "username": "BretUpdated",
   "email": "leanne.updated@example.com",
   "phone": "123-456-7890",
-  "website": "leanne-updated.org",
+  "website": "leanne-updated.orggg",
   "address": {
     "street": "Updated Street",
     "suite": "Suite 42",
