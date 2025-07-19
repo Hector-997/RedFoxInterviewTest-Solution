@@ -4,12 +4,11 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RedFox.Application.DTO;
-using RedFox.Application.Features.Query;
 using RedFox.Application.Service.Infrastructure;
 
 #endregion
 
-namespace RedFox.Application.Features.Handler;
+namespace RedFox.Application.Features.Users.GetAll;
 
 public class GetAllUserWithRelatedHandler(
     IAppDbContext context,

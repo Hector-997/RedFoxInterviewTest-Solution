@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RedFox.Application.DTO;
-using RedFox.Application.Features.Query;
+using RedFox.Application.Features.Users.Create;
 using RedFox.Application.Service.Api;
 using RedFox.Application.Service.Infrastructure;
 using RedFox.Domain.ValueObjects;

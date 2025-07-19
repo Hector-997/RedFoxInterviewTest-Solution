@@ -3,13 +3,12 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using RedFox.Application.Features.Query;
 using RedFox.Application.Service.Infrastructure;
 using RedFox.Domain.Entities;
 
 #endregion
 
-namespace RedFox.Application.Features.Handler;
+namespace RedFox.Application.Features.Users.Create;
 
 public class AddUsersWithRelatedCommandHandler(
     IAppDbContext context,

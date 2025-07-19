@@ -3,7 +3,10 @@
 using MediatR;
 using RedFox.Api.Jobs;
 using RedFox.Application;
-using RedFox.Application.Features.Query;
+using RedFox.Application.DTO;
+using RedFox.Application.Features.Users.Create;
+using RedFox.Application.Features.Users.GetAll;
+using RedFox.Application.Features.Users.GetSingle;
 using RedFox.Infrastructure;
 
 #endregion
@@ -36,6 +39,20 @@ app.MapGet("/users",
 app.MapGet("/users/{id}", 
         async (int id, IMediator context) => await context.Send(new GetUserWithRelatedQuery(id)))
     .WithName("GetUser")
+    .WithOpenApi();
+
+app.MapPost("/users", async (UserCreationDto userDto, IMediator mediator) =>
+    {
+        var result = await mediator.Send(new AddUsersWithRelatedCommand([userDto]));
+
+        if (result.Any())
+        {
+            return Results.Created($"/users/{result.First()}", result);
+        }
+
+        return Results.Problem("User was not created");
+    })
+    .WithName("CreateUser")
     .WithOpenApi();
 
 
