@@ -22,7 +22,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(50);
 
-        // Configurar Address como owned entity (Value Object)
         builder.OwnsOne(u => u.Address, address =>
         {
             address.Property(a => a.Street)
@@ -40,7 +39,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 .IsRequired()
                 .HasMaxLength(20);
 
-            // Configurar Geolocation como owned dentro de Address
             address.OwnsOne(a => a.Geo, geo =>
             {
                 geo.Property(g => g.Latitude)
