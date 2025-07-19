@@ -1,3 +1,5 @@
+using RedFox.Domain.ValueObjects;
+
 namespace RedFox.Domain.Entities;
 
 public class User
@@ -12,5 +14,6 @@ public class User
 
     public string Website { get; set; } = string.Empty;
     public int CompanyId { get; set; }
+    public Address Address { get; set; }
     public Company? Company { get; set; }
 }
