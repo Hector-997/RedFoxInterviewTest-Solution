@@ -5,6 +5,7 @@ using RedFox.Api.Jobs;
 using RedFox.Application;
 using RedFox.Application.DTO;
 using RedFox.Application.Features.Users.Create;
+using RedFox.Application.Features.Users.Delete;
 using RedFox.Application.Features.Users.GetAll;
 using RedFox.Application.Features.Users.GetSingle;
 using RedFox.Application.Features.Users.Update;
@@ -58,6 +59,17 @@ app.MapPut("/users/{id}", async (int id, UpdateUserWithRelatedRequest request, I
         ? Results.Ok(result)
         : Results.NotFound($"User with ID {id} was not found.");
 });
+
+app.MapDelete("/users/{id}", async (int id, IMediator mediator) =>
+{
+    var result = await mediator.Send(new DeleteUserCommand(id));
+
+    return result
+        ? Results.NoContent()
+        : Results.NotFound($"User with ID {id} was not found.");
+})
+.WithName("DeleteUser")
+.WithOpenApi();
 
 
 
