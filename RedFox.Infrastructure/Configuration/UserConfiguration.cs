@@ -13,53 +13,44 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(u => u.Id);
-        builder.Property(u => u.Name).IsRequired().HasMaxLength(100);
-        builder.Property(u => u.Username).IsRequired().HasMaxLength(50);
 
-        public class UserConfiguration : IEntityTypeConfiguration<User>
-    {
-        public void Configure(EntityTypeBuilder<User> builder)
+        builder.Property(u => u.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(u => u.Username)
+            .IsRequired()
+            .HasMaxLength(50);
+
+        // Configurar Address como owned entity (Value Object)
+        builder.OwnsOne(u => u.Address, address =>
         {
-            builder.HasKey(u => u.Id);
+            address.Property(a => a.Street)
+                .IsRequired()
+                .HasMaxLength(200);
 
-            builder.Property(u => u.Name)
+            address.Property(a => a.Suite)
+                .HasMaxLength(100);
+
+            address.Property(a => a.City)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(u => u.Username)
+            address.Property(a => a.Zipcode)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(20);
 
-            builder.OwnsOne(u => u.Address, address =>
+            // Configurar Geolocation como owned dentro de Address
+            address.OwnsOne(a => a.Geo, geo =>
             {
-                address.Property(a => a.Street)
+                geo.Property(g => g.Latitude)
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(50);
 
-                address.Property(a => a.Suite)
-                    .HasMaxLength(100);
-
-                address.Property(a => a.City)
+                geo.Property(g => g.Longitude)
                     .IsRequired()
-                    .HasMaxLength(100);
-
-                address.Property(a => a.Zipcode)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                address.OwnsOne(a => a.Geo, geo =>
-                {
-                    geo.Property(g => g.Latitude)
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    geo.Property(g => g.Longitude)
-                        .IsRequired()
-                        .HasMaxLength(50);
-                });
+                    .HasMaxLength(50);
             });
-        }
+        });
     }
-
-}
 }
