@@ -6,4 +6,5 @@ public record UserCreationDto(
     string Email,
     string Phone,
     string Website,
+    AddressDto Address,
     CompanyDto Company);

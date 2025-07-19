@@ -2,10 +2,13 @@
 
 using System.Text.Json;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using RedFox.Application.DTO;
 using RedFox.Application.Features.Query;
 using RedFox.Application.Service.Api;
 using RedFox.Application.Service.Infrastructure;
+using RedFox.Domain.ValueObjects;
 
 #endregion
 
@@ -17,9 +20,13 @@ public class DbInitWorker(ILogger<DbInitWorker> logger, IServiceProvider scopeFa
     {
         try
         {
-            if (!await TryInitDb(stoppingToken))
+            // Aplica migraciones pendientes (crea la DB si no existe)
+            await TryInitDb(stoppingToken);
+            logger.LogInformation("Database initialized or already up to date.");
+
+            if (await UsersAlreadyExist(stoppingToken))
             {
-                logger.LogInformation("Db already created");
+                logger.LogInformation("Users already exist, skipping seed.");
                 return;
             }
 
@@ -45,6 +52,7 @@ public class DbInitWorker(ILogger<DbInitWorker> logger, IServiceProvider scopeFa
                     x.GetProperty("email").GetString() ?? string.Empty,
                     x.GetProperty("phone").GetString() ?? string.Empty,
                     x.GetProperty("website").GetString() ?? string.Empty,
+                    GetAddress(x.GetProperty("address")),
                     GetCompany(x.GetProperty("company"))
                 )
             ).ToList();
@@ -56,6 +64,8 @@ public class DbInitWorker(ILogger<DbInitWorker> logger, IServiceProvider scopeFa
     {
         await using var scope = scopeFactory.CreateAsyncScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<IAppDbContext>();
+        var anyUserExists = await dbContext.Users.AnyAsync(ct);
         var userIds = await mediator.Send(command, ct);
         logger.LogInformation("Db init success, added {P1} new users", userIds.Count());
     }
@@ -68,6 +78,24 @@ public class DbInitWorker(ILogger<DbInitWorker> logger, IServiceProvider scopeFa
         return new CompanyDto(name, catchPhrase, bs);
     }
 
+    private static AddressDto GetAddress(JsonElement addressElement)
+    {
+        var street = addressElement.GetProperty("street").GetString() ?? string.Empty;
+        var suite = addressElement.GetProperty("suite").GetString() ?? string.Empty;
+        var city = addressElement.GetProperty("city").GetString() ?? string.Empty;
+        var zipcode = addressElement.GetProperty("zipcode").GetString() ?? string.Empty;
+        var geo = GetGeolocation(addressElement.GetProperty("geo"));
+
+        return new AddressDto(street, suite, city, zipcode, geo);
+    }
+
+    private static GeolocationDto GetGeolocation(JsonElement geoElement)
+    {
+        var lat = geoElement.GetProperty("lat").GetString() ?? string.Empty;
+        var lng = geoElement.GetProperty("lng").GetString() ?? string.Empty;
+        return new GeolocationDto(lat, lng);
+    }
+
     private async Task<Stream> FetchUsers(CancellationToken ct)
     {
         logger.LogInformation("Fetch initial data");
@@ -76,11 +104,20 @@ public class DbInitWorker(ILogger<DbInitWorker> logger, IServiceProvider scopeFa
         return await userService.GetUsers(ct);
     }
 
-    private async Task<bool> TryInitDb(CancellationToken ct)
+    private async Task TryInitDb(CancellationToken ct)
     {
         logger.LogInformation("Running DB Init Worker");
         await using var scope = scopeFactory.CreateAsyncScope();
         var appDbContext = scope.ServiceProvider.GetRequiredService<IAppDbContext>();
-        return await appDbContext.Database.EnsureCreatedAsync(ct);
+        await appDbContext.Database.MigrateAsync(ct);
     }
+
+    private async Task<bool> UsersAlreadyExist(CancellationToken ct)
+    {
+        await using var scope = scopeFactory.CreateAsyncScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<IAppDbContext>();
+
+        return await dbContext.Users.AnyAsync(ct);
+    }
+
 }

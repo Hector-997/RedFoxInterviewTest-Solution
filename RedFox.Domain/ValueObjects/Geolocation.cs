@@ -1,3 +1,7 @@
 ﻿namespace RedFox.Domain.ValueObjects;
 
-public record Geolocation(string Latitude, string Longitude);
+public record Geolocation
+{
+    public required string Latitude { get; init; }
+    public required string Longitude { get; init; }
+}
