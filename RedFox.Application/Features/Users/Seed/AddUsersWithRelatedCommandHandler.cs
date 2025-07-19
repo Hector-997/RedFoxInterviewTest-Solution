@@ -8,12 +8,12 @@ using RedFox.Domain.Entities;
 
 #endregion
 
-namespace RedFox.Application.Features.Users.Create;
+namespace RedFox.Application.Features.Users.Seed;
 
-public class AddUsersWithRelatedCommandHandler(
+public class AddUserWithRelatedCommandHandler(
     IAppDbContext context,
     IMapper mapper,
-    ILogger<AddUsersWithRelatedCommandHandler> logger
+    ILogger<AddUserWithRelatedCommandHandler> logger
 ) : IRequestHandler<AddUsersWithRelatedCommand, IEnumerable<int>>
 {
     public async Task<IEnumerable<int>> Handle(AddUsersWithRelatedCommand request, CancellationToken ct)

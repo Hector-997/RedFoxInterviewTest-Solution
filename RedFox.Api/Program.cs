@@ -41,16 +41,10 @@ app.MapGet("/users/{id}",
     .WithName("GetUser")
     .WithOpenApi();
 
-app.MapPost("/users", async (UserCreationDto userDto, IMediator mediator) =>
+app.MapPost("/users", async (AddUserWithRelatedRequest request, IMediator mediator) =>
     {
-        var result = await mediator.Send(new AddUsersWithRelatedCommand([userDto]));
-
-        if (result.Any())
-        {
-            return Results.Created($"/users/{result.First()}", result);
-        }
-
-        return Results.Problem("User was not created");
+        var result = await mediator.Send(new AddUserWithRelatedCommand(request));
+        return Results.Created($"/users/{result}", result);
     })
     .WithName("CreateUser")
     .WithOpenApi();

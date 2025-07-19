@@ -49,5 +49,7 @@ public class MappingProfile : Profile
 
         CreateMap<UserCreationDto, User>()
             .ForMember(dest => dest.Company, opt => opt.MapFrom(src => src.Company));
+
+        CreateMap<AddUserWithRelatedRequest, User>();
     }
 }
