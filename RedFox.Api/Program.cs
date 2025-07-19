@@ -28,8 +28,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/users", async (IMediator context) => await context.Send(new GetAllUserWithRelatedQuery()))
+app.MapGet("/users", 
+        async (IMediator context) => await context.Send(new GetAllUserWithRelatedQuery()))
     .WithName("GetUsers")
+    .WithOpenApi();
+
+app.MapGet("/users/{id}", 
+        async (int id, IMediator context) => await context.Send(new GetUserWithRelatedQuery(id)))
+    .WithName("GetUser")
     .WithOpenApi();
 
 
