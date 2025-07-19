@@ -2,6 +2,7 @@
 
 using MediatR;
 using RedFox.Api.Jobs;
+using RedFox.Api.Middlewares;
 using RedFox.Application;
 using RedFox.Application.DTO;
 using RedFox.Application.Features.Users.Create;
@@ -71,6 +72,6 @@ app.MapDelete("/users/{id}", async (int id, IMediator mediator) =>
 .WithName("DeleteUser")
 .WithOpenApi();
 
-
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 await app.RunAsync();

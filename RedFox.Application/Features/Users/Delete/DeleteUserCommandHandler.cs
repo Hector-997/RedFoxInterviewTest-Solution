@@ -7,7 +7,6 @@ namespace RedFox.Application.Features.Users.Delete;
 
 public class DeleteUserCommandHandler(
     IAppDbContext context,
-    IMapper mapper,
     ILogger<DeleteUserCommandHandler> logger)
     : IRequestHandler<DeleteUserCommand, bool>
 {
@@ -20,6 +19,8 @@ public class DeleteUserCommandHandler(
         context.Users.Remove(user);
 
         await context.SaveChangesAsync();
+
+        logger.LogInformation($"User with id: {command.Id} was deleted successfully");
 
         return true;
     }
