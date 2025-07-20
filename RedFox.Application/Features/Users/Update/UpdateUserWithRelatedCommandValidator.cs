@@ -1,10 +1,10 @@
-﻿namespace RedFox.Application.Features.Users.Create;
+﻿using FluentValidation;
 
-using FluentValidation;
+namespace RedFox.Application.Features.Users.Update;
 
-public class AddUserWithRelatedRequestValidator : AbstractValidator<AddUserWithRelatedCommand>
+public class UpdateUserWithRelatedCommandValidator : AbstractValidator<UpdateUserWithRelatedCommand>
 {
-    public AddUserWithRelatedRequestValidator()
+    public UpdateUserWithRelatedCommandValidator()
     {
         RuleFor(x => x.Payload.Name)
             .NotEmpty().WithMessage("Name is required");
