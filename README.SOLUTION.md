@@ -93,4 +93,4 @@ Make sure the project has access to a valid SQLite connection string as defined 
 
 ## 🧑‍💻 Author
 
-Developed as part of a technical interview challenge. All architectural decisions were made to reflect best practices in maintainability, readability, and domain-driven design.
+Developed as part of a technical interview challenge. All architectural decisions were made to reflect best practices in maintainability and readability.
